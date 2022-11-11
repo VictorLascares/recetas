@@ -1,7 +1,6 @@
 function iniciarApp() {
   const selectCategorias = document.querySelector("#categorias");
 
-
   selectCategorias.addEventListener("change", filtrarPorCategoria);
 
   obtenerCategorias();
@@ -33,11 +32,30 @@ function iniciarApp() {
     try {
       const respuesta = await fetch(url);
       const comidas = await respuesta.json();
-      console.log(comidas);
+      mostrarRecetas(comidas.meals);
     } catch (error) {
       console.log(error);
     }
-    console.log(e.target.value);
+  }
+
+  function mostrarRecetas(comidas = []) {
+    comidas.forEach((comida) => {
+      const { idMeal, strMeal, strMealThumb } = comida;
+
+      const comidaContenedor = document.createElement("div");
+      comidaContenedor.classList.add("col-md-4");
+
+      const comidaCard =  document.createElement("div");
+      comidaCard.classList.add("card", "mb-4");
+
+      const comidaImagen = document.createElement("img");
+      comidaImagen.classList.add("card-img-top");
+      comidaImagen.alt = `Imagen de la comida ${strMeal}`;
+      comidaImagen.src = strMealThumb;
+
+      const comidaCardBody = document.createElement("div");
+      comidaCardBody.classList.add("card-body");
+    });
   }
 }
 
