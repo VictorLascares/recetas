@@ -1,5 +1,6 @@
 function iniciarApp() {
   const selectCategorias = document.querySelector("#categorias");
+  const resultado = document.querySelector("#resultado");
 
   selectCategorias.addEventListener("change", filtrarPorCategoria);
 
@@ -55,6 +56,24 @@ function iniciarApp() {
 
       const comidaCardBody = document.createElement("div");
       comidaCardBody.classList.add("card-body");
+
+      const comidaHeading = document.createElement("h3");
+      comidaHeading.classList.add("card-title", "mb-3", "text-center");
+      comidaHeading.textContent = strMeal;
+
+      const comidaButton = document.createElement("button");
+      comidaButton.classList.add("btn", "btn-danger", "w-100");
+      comidaButton.textContent = "Ver receta";
+
+      comidaCardBody.appendChild(comidaHeading);
+      comidaCardBody.appendChild(comidaButton);
+
+      comidaCard.appendChild(comidaImagen);
+      comidaCard.appendChild(comidaCardBody);
+
+      comidaContenedor.appendChild(comidaCard);
+
+      resultado.appendChild(comidaContenedor);
     });
   }
 }
