@@ -1,4 +1,6 @@
 function iniciarApp() {
+  const selectCategorias = document.querySelector("#categorias");
+
   obtenerCategorias();
 
   async function obtenerCategorias() {
@@ -7,10 +9,20 @@ function iniciarApp() {
     try {
       const respuesta = await fetch(url);
       const categorias = await respuesta.json();
-      console.log(categorias);
+      mostrarCategorias(categorias.categories);
     } catch (error) {
       console.log(error);
     }
+  }
+
+  function mostrarCategorias(categorias = []) {
+    categorias.forEach((categoria) => {
+      const { strCategory } = categoria;
+      const option = document.createElement("option");
+      option.value = strCategory;
+      option.textContent = strCategory;
+      selectCategorias.appendChild(option);
+    });
   }
 }
 
