@@ -1,0 +1,11 @@
+{
+  "name": "recetas",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/VictorLascares/recetas.git",
+  "author": "VictorLascares <vmlascares@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
