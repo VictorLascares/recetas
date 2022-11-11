@@ -1,6 +1,7 @@
 function iniciarApp() {
   const selectCategorias = document.querySelector("#categorias");
   const resultado = document.querySelector("#resultado");
+  const modal = new bootstrap.Modal("#modal", {});
 
   selectCategorias.addEventListener("change", filtrarPorCategoria);
 
@@ -101,7 +102,30 @@ function iniciarApp() {
   }
 
   function mostrarRecetaModal(receta) {
-    console.log(receta);
+    const { idMeal, strInstructions, strMeal, strMealThumb } = receta;
+
+    const modalTitle = document.querySelector(".modal .modal-title");
+    const modalBody = document.querySelector(".modal .modal-body");
+
+    modalTitle.textContent = strMeal;
+
+    const modalImage = document.createElement("img");
+    modalImage.classList.add("img-fluid");
+    modalImage.alt = `Receta de ${strMeal}`;
+    modalImage.src = strMealThumb;
+
+    const heading = document.createElement("h3");
+    heading.classList.add("my-3");
+    heading.textContent = "Instrucciones";
+
+    const instructions = document.createElement("p");
+    instructions.textContent = strInstructions;
+
+    modalBody.appendChild(modalImage);
+    modalBody.appendChild(heading);
+    modalBody.appendChild(instructions);
+
+    modal.show();
   }
 
   function limpiarHTML(referencia) {
