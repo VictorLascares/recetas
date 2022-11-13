@@ -166,6 +166,8 @@ function iniciarApp() {
     const btnFavorito = document.createElement("button");
     btnFavorito.classList.add("btn", "btn-danger", "col");
     btnFavorito.textContent = "Guardar Favorito";
+    btnFavorito.onclick = () =>
+      agregarFavorito({ id: idMeal, titulo: strMeal, img: strMealThumb });
 
     const btnCerrarModal = document.createElement("button");
     btnCerrarModal.classList.add("btn", "btn-secondary", "col");
@@ -175,6 +177,11 @@ function iniciarApp() {
     modalFooter.appendChild(btnFavorito);
     modalFooter.appendChild(btnCerrarModal);
     modal.show();
+  }
+
+  function agregarFavorito(receta) {
+    const favoritos = JSON.parse(localStorage.getItem("favoritos")) ?? [];
+    localStorage.setItem("favoritos", JSON.stringify([...favoritos, receta]));
   }
 
   function limpiarHTML(referencia) {
