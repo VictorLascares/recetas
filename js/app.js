@@ -106,9 +106,11 @@ function iniciarApp() {
 
     const modalTitle = document.querySelector(".modal .modal-title");
     const modalBody = document.querySelector(".modal .modal-body");
+    const modalFooter = document.querySelector(".modal-footer");
 
     // Limpiar HTML previo
     limpiarHTML(modalBody);
+    limpiarHTML(modalFooter);
 
     modalTitle.textContent = strMeal;
 
@@ -160,6 +162,18 @@ function iniciarApp() {
 
     modalBody.appendChild(listGroup);
 
+    // Botones de cerrar y favorito
+    const btnFavorito = document.createElement("button");
+    btnFavorito.classList.add("btn", "btn-danger", "col");
+    btnFavorito.textContent = "Guardar Favorito";
+
+    const btnCerrarModal = document.createElement("button");
+    btnCerrarModal.classList.add("btn", "btn-secondary", "col");
+    btnCerrarModal.textContent = "Cerrar";
+    btnCerrarModal.onclick = () => modal.hide();
+
+    modalFooter.appendChild(btnFavorito);
+    modalFooter.appendChild(btnCerrarModal);
     modal.show();
   }
 
