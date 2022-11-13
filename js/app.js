@@ -107,6 +107,9 @@ function iniciarApp() {
     const modalTitle = document.querySelector(".modal .modal-title");
     const modalBody = document.querySelector(".modal .modal-body");
 
+    // Limpiar HTML previo
+    limpiarHTML(modalBody);
+
     modalTitle.textContent = strMeal;
 
     const modalImage = document.createElement("img");
@@ -114,16 +117,48 @@ function iniciarApp() {
     modalImage.alt = `Receta de ${strMeal}`;
     modalImage.src = strMealThumb;
 
-    const heading = document.createElement("h3");
-    heading.classList.add("my-3");
-    heading.textContent = "Instrucciones";
+    const headingInstructions = document.createElement("h3");
+    headingInstructions.classList.add("my-3");
+    headingInstructions.textContent = "Instrucciones";
 
     const instructions = document.createElement("p");
     instructions.textContent = strInstructions;
 
+    const headingIngredients = document.createElement("h3");
+    headingIngredients.classList.add("my-3");
+    headingIngredients.textContent = "Ingredientes y Cantidades";
+
     modalBody.appendChild(modalImage);
-    modalBody.appendChild(heading);
+    modalBody.appendChild(headingInstructions);
     modalBody.appendChild(instructions);
+    modalBody.appendChild(headingIngredients);
+
+    const listGroup = document.createElement("ul");
+    listGroup.classList.add("list-group");
+
+    // Contar el numero de ingredientes
+    const eRegular = /strIngredient\d\d*/;
+    const nIngredients = Object.keys(receta).reduce(
+      (total, propiedad) =>
+        eRegular.test(propiedad) && receta[propiedad] !== ""
+          ? total + 1
+          : total,
+      0
+    );
+
+    // Mostrar cantidades e ingredientes
+    for (let i = 1; i <= nIngredients; i++) {
+      const ingrediente = receta[`strIngredient${i}`];
+      const cantidad = receta[`strMeasure${i}`];
+
+      const ingredienteLi = document.createElement("li");
+      ingredienteLi.classList.add("list-group-item");
+      ingredienteLi.textContent = `${ingrediente} - ${cantidad}`;
+
+      listGroup.appendChild(ingredienteLi);
+    }
+
+    modalBody.appendChild(listGroup);
 
     modal.show();
   }
